@@ -1,0 +1,90 @@
+---
+import Base from "../layouts/Base.astro";
+import Notice from "../components/Notice.astro";
+import { ads, site } from "../config";
+
+const minutesBetween = ads.secondsBetweenInterstitials / 60;
+
+const description = `Advertising policy for ${site.name}. Optional rewarded ads, interstitials between runs, and Remove Ads.`;
+---
+
+<Base title="Advertising Policy" description={description}>
+  <article class="doc">
+    <p class="kicker">Advertising Policy</p>
+    <h1>Advertising Policy</h1>
+    <p class="updated">Last updated {site.updated}</p>
+    <Notice />
+    <p>
+      {site.name} is free to start. A store build may include advertising to support the game. This
+      page explains what those ads are, when they can appear, and how to limit them. Questions go
+      to <a href={`mailto:${site.email}`}>{site.email}</a>.
+    </p>
+
+    <h2>Who serves the ads</h2>
+    <p>
+      Ads are served by Google AdMob. Google's privacy policy applies to the ad request:
+      <a href="https://policies.google.com/privacy">policies.google.com/privacy</a>.
+      We do not sell ad space ourselves. Advertisers do not get a game account from you, because
+      the game does not have accounts.
+    </p>
+
+    <h2>Rewarded ads</h2>
+    <p>
+      Some ads are optional. You choose to watch one. A completed rewarded ad can grant energy, or
+      continue a run in Endless Voyage. Closing it early does not grant the reward. The game does
+      not require a rewarded ad in order to play.
+    </p>
+
+    <h2>Interstitial ads</h2>
+    <p>
+      An interstitial is a full-screen ad between runs. It is not shown while you are aiming, and
+      it is not shown while Spark is in flight.
+    </p>
+    <p>
+      The game waits until you have finished at least {ads.runsBeforeFirstInterstitial} runs before
+      the first interstitial. After that, at least {ads.runsBetweenInterstitials} runs and {minutesBetween}
+      minutes pass between interstitials. If you just watched a rewarded ad, the next interstitial
+      is held back.
+    </p>
+
+    <h2>Remove Ads</h2>
+    <p>
+      The in-app purchase named Remove Ads stops forced interstitial ads. It does not remove the
+      choice to watch a rewarded ad, including a continue you start yourself in Endless Voyage.
+      The store product id is {site.removeAdsProductId}. Apple or Google handles the payment, as
+      described in the <a href="/terms">Terms of Use</a>.
+    </p>
+
+    <h2>What an ad can know</h2>
+    <p>
+      When ads are enabled, AdMob may use an advertising identifier, coarse device information such
+      as language and general device type, the app id, and whether an ad was shown or tapped.
+      Google may process an IP address to deliver the ad and to limit fraud. We do not keep a copy
+      of your advertising identifier.
+    </p>
+    <p>
+      If the app asks for permission to track you across apps and websites owned by other
+      companies, you can refuse. You can also reset or delete the advertising identifier, and opt
+      out of ads personalization, in your phone's settings. Those choices can limit personalized
+      ads. They do not have to turn ads off entirely.
+    </p>
+
+    <h2>Children</h2>
+    <p>
+      The game is not directed at children under 13. Ad requests are not made as child-directed
+      treatment. We do not use ads to build a profile of a child.
+    </p>
+
+    <h2>Test builds</h2>
+    <p>
+      Some test builds have advertising switched off. The rules on this page apply to a store
+      build in which advertising is enabled.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      {site.publisher}<br />
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
+  </article>
+</Base>

@@ -1,0 +1,62 @@
+---
+import Base from "../layouts/Base.astro";
+import Notice from "../components/Notice.astro";
+import { site } from "../config";
+
+const description = `How to delete data from ${site.name}. The game has no account. Progress stays on your device.`;
+---
+
+<Base title="Your Data" description={description}>
+  <article class="doc">
+    <p class="kicker">Your Data</p>
+    <h1>Your Data</h1>
+    <p class="updated">Last updated {site.updated}</p>
+    <Notice />
+    <p>
+      {site.name} does not create an account. There is no login, no profile on a server of ours,
+      and no cloud copy of your game.
+    </p>
+
+    <h2>What is stored</h2>
+    <p>
+      The app keeps your progress on the device: levels, scores, energy, shards, cosmetics, and
+      settings. The save is stored locally under the name {site.saveKey}. We do not receive it.
+    </p>
+    <p>
+      If you email <a href={`mailto:${site.email}`}>{site.email}</a>, that message is the
+      information we hold. We use it to reply and keep it in our email account. You can ask us to
+      delete it.
+    </p>
+
+    <h2>How to delete it</h2>
+    <p>
+      On iPhone or iPad, delete {site.name}. The system deletes the app's local data with the app.
+    </p>
+    <p>
+      On Android, clear the app's storage in Settings, or uninstall the app. Either one deletes the
+      local save.
+    </p>
+    <p>
+      There is no server save for us to erase. After you do this, nothing from the game itself
+      remains with us.
+    </p>
+    <p>
+      To ask us to delete an email you sent, write to
+      <a href={`mailto:${site.email}`}>{site.email}</a> from that same address and say you want the
+      correspondence deleted.
+    </p>
+
+    <h2>Advertising identifiers</h2>
+    <p>
+      When ads are enabled, an advertising identifier is handled by your device and by Google
+      AdMob. We do not store it as an account. You can reset or delete it in your device settings.
+      See the <a href="/advertising">Advertising Policy</a>.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      {site.publisher}<br />
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
+  </article>
+</Base>

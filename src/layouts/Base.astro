@@ -1,0 +1,91 @@
+---
+import "../styles/global.css";
+import { site } from "../config";
+
+interface Props {
+  title?: string;
+  description: string;
+  home?: boolean;
+}
+
+const { title, description, home = false } = Astro.props;
+const pageTitle = title ? `${title} · ${site.name}` : site.name;
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const links = [
+  { href: "/privacy", label: "Privacy" },
+  { href: "/advertising", label: "Advertising" },
+  { href: "/terms", label: "Terms" },
+  { href: "/support", label: "Support" },
+  { href: "/data", label: "Your Data" },
+];
+
+const sections = [
+  { href: "/#features", label: "Features" },
+  { href: "/#worlds", label: "Worlds" },
+  { href: "/#gameplay", label: "Gameplay" },
+  { href: "/story", label: "Story" },
+  { href: "/#faq", label: "FAQ" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#050B15" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/og.jpg" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body class={home ? "is-home" : "is-doc"}>
+    <a class="skip" href="#content">Skip to content</a>
+    <header class="top">
+      <a class="brand" href="/">
+        <span class="mark">
+          <img src="/mark.jpg" width="40" height="40" alt="" />
+        </span>
+        <span class="brand-text">
+          SPARK
+          <small>Escape to Luma</small>
+        </span>
+      </a>
+      <input class="menu-check" id="menu" type="checkbox" />
+      <label class="menu-button" for="menu">Menu</label>
+      <nav class="primary" aria-label="Page">
+        {sections.map((link) => (
+          <a href={link.href} aria-current={path === link.href ? "page" : undefined}>
+            {link.label}
+          </a>
+        ))}
+      </nav>
+      <a class="btn btn-small" href="/#soon">Coming soon</a>
+    </header>
+    <main id="content">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <nav aria-label="Store and policy">
+        {
+          links.map((link) => (
+            <a href={link.href} aria-current={path === link.href ? "page" : undefined}>
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+      <p class="fine">
+        © {new Date().getFullYear()} {site.publisher}
+        {" · "}
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </footer>
+  </body>
+</html>

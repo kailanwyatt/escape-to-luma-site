@@ -1,0 +1,541 @@
+---
+import Base from "../layouts/Base.astro";
+import "../styles/story.css";
+
+const description =
+  "The story of Spark's journey from the laboratory to Luma. A spoiler warning opens the book.";
+
+const chapters = [
+  {
+    number: "01",
+    name: "Containment",
+    note: "The vessel breaks",
+    kicker: "Containment",
+    title: "Beyond the glass",
+    paragraphs: [
+      "The glass falls away. Spark is beyond the vessel, but alarms are calling the retrieval systems awake. Somewhere outside, a familiar signal still calls.",
+      "The facility wants its specimen back. Every open passage is a chance to stay free.",
+    ],
+    quote: "They measured the power. They missed the life.",
+    image: "/worlds/containment.jpg",
+    imageAlt: "A cyan spark held inside a laboratory aperture.",
+    caption: "Specimen S-01",
+  },
+  {
+    number: "02",
+    name: "Lockdown",
+    note: "The way is closing",
+    kicker: "Lockdown",
+    title: "The way out is closing",
+    paragraphs: [
+      "Bulkheads seal behind Spark. Capture checkpoints and service shafts stand between the escaped specimen and open air.",
+      "The vessel is behind him, but the facility has begun a retrieval cycle. Deeper corridors lead toward the surface.",
+    ],
+    quote: "The facility wants its specimen back.",
+    image: "/worlds/lockdown.jpg",
+    imageAlt: "Security beams crossing a circular laboratory opening.",
+    caption: "The lab wakes",
+  },
+  {
+    number: "03",
+    name: "The City",
+    note: "Open air",
+    kicker: "The escape",
+    title: "Open air",
+    paragraphs: [
+      "The last bulkhead falls silent. Spark reaches open air, but retrieval signals are already spreading across the city.",
+      "On the rooftops, shutters retract, warn, and slam. Cyan means open. Amber warns. Red means the way is gone.",
+    ],
+    quote: "Freedom lies beyond the search.",
+    image: "/worlds/city.jpg",
+    imageAlt: "Spark rising over a city at night.",
+    caption: "The rooftops",
+  },
+  {
+    number: "04",
+    name: "The Ascent",
+    note: "Above the city",
+    kicker: "The ascent",
+    title: "Above the city",
+    paragraphs: [
+      "Spark reaches the highest roof. Retrieval patrols still cross the climb ahead, and weather towers disappear into cloud.",
+      "He climbs toward those clouds, searching for a route beyond their reach. The familiar signal calls from higher than the search lights.",
+    ],
+    quote: "The signal calls from higher than the search.",
+    image: "/worlds/ascent.jpg",
+    imageAlt: "A city glowing beneath an open sky.",
+    caption: "The climb",
+  },
+  {
+    number: "05",
+    name: "The Storm",
+    note: "The lights vanish",
+    kicker: "The storm",
+    title: "The clouds part",
+    paragraphs: [
+      "The search lights vanish into cloud. Wind and charged air replace the patrols below.",
+      "The storm swallows the last of them. Beyond the weather, an orbital transfer facility waits.",
+    ],
+    quote: "The storm swallows the last search lights.",
+    image: "/worlds/sky.jpg",
+    imageAlt: "Spark passing a ring above the clouds.",
+    caption: "Above the search",
+  },
+  {
+    number: "06",
+    name: "Upper Atmosphere",
+    note: "Earth falls away",
+    kicker: "Thin air",
+    title: "Earth falls away",
+    paragraphs: [
+      "Earth curves below an orbital transfer facility. Spark follows the signal along its service platforms, through pressure irises and climb rings.",
+      "The final transfer lock opens. Earth's retrieval signals fade behind him.",
+    ],
+    quote: "Earth's retrieval signals fade.",
+    image: "/worlds/upper-atmosphere.jpg",
+    imageAlt: "A ring above the curve of the clouds.",
+    caption: "The transfer",
+  },
+  {
+    number: "07",
+    name: "Orbit",
+    note: "Silent lanes",
+    kicker: "Orbit",
+    title: "The first lanes",
+    paragraphs: [
+      "Silent satellites mark the first lanes of orbit. Loose booms swing across the service route.",
+      "Spark follows the signal from one surviving Jump Gate to the next, toward the Moon.",
+    ],
+    quote: "Ahead, the lanes are quiet.",
+    image: "/worlds/orbit.jpg",
+    imageAlt: "Spark in orbit above the curve of Earth.",
+    caption: "Toward the Moon",
+  },
+  {
+    number: "08",
+    name: "Orbital Graveyard",
+    note: "Old machines",
+    kicker: "The graveyard",
+    title: "A light on the Moon",
+    paragraphs: [
+      "The satellite lanes end in wreckage. Among the broken machines, old containment systems still hold their light.",
+      "Beyond the drifting wreckage, a lunar relay answers Spark's pulse. It is not the source. It offers a path.",
+    ],
+    quote: "It is not the source. It is a path.",
+    image: "/worlds/graveyard.jpg",
+    imageAlt: "A ring and a cyan spark above the curve of Earth.",
+    caption: "The wreckage",
+  },
+  {
+    number: "09",
+    name: "The Moon",
+    note: "Not alone",
+    kicker: "The Moon",
+    title: "Not alone",
+    paragraphs: [
+      "Spark reaches a deserted lunar relay. Small lights gather near the outpost, drawn to his glow.",
+      "Beyond human reach, he is still not alone. The relay points around the far side, and Earth begins to slip from sight.",
+    ],
+    quote: "Beyond human reach, Spark is still not alone.",
+    image: "/worlds/moon.jpg",
+    imageAlt: "Spark glowing above the dark curve of a world.",
+    caption: "The lunar relay",
+  },
+  {
+    number: "10",
+    name: "Far Side",
+    note: "Earth disappears",
+    kicker: "Far side",
+    title: "Earth disappears",
+    paragraphs: [
+      "On the far side, the signal sharpens. Earth is gone from view, and the quiet is broken only by Spark's own pulse.",
+      "A dormant Jump Gate wakes beneath his light, opening toward a distant trail of shattered rock.",
+    ],
+    quote: "The signal sharpens in the dark.",
+    image: "/worlds/far-side.jpg",
+    imageAlt: "A dark world and a cyan spark in open space.",
+    caption: "Beyond the shadow",
+  },
+  {
+    number: "11",
+    name: "Asteroid Belt",
+    note: "Temporary lanes",
+    kicker: "The belt",
+    title: "Every lane is temporary",
+    paragraphs: [
+      "The path leads into a belt of fractured rock. Unfamiliar life stirs among the fragments, drawn to Spark's light.",
+      "Every clear lane is temporary. He keeps to the gaps and follows the signal through.",
+    ],
+    quote: "Every clear lane is temporary.",
+    image: "/worlds/asteroid.jpg",
+    imageAlt: "A cyan spark crossing open space toward a ring of light.",
+    caption: "The fragments",
+  },
+  {
+    number: "12",
+    name: "The Drift",
+    note: "A faint current",
+    kicker: "The drift",
+    title: "A familiar glow",
+    paragraphs: [
+      "The fragments thin. The unfamiliar creatures fade into the distance, leaving only a faint current of light ahead.",
+      "Spark slips beyond the last tumbling rock. Through the next gate, vast clouds pulse with a rhythm he remembers.",
+    ],
+    quote: "The signal is stronger than ever.",
+    image: "/worlds/drift.jpg",
+    imageAlt: "Spark approaching a golden ring in the dark.",
+    caption: "The current",
+  },
+  {
+    number: "13",
+    name: "The Nebula",
+    note: "A familiar rhythm",
+    kicker: "The nebula",
+    title: "Something darker",
+    paragraphs: [
+      "Luminous clouds answer with a rhythm he remembers. Spark follows the glow.",
+      "He does not yet see the darker presence feeding between the lights. A patch of night moves against the surrounding glow.",
+    ],
+    quote: "Something is feeding here.",
+    image: "/worlds/nebula.jpg",
+    imageAlt: "A golden opening of light in deep space.",
+    caption: "The glow",
+  },
+  {
+    number: "14",
+    name: "The Null",
+    note: "Keep moving",
+    kicker: "The Null",
+    title: "Keep moving",
+    paragraphs: [
+      "Something here feeds on light. Spark must find a way through the darkness without becoming its next light.",
+      "He leaves the hungry dark behind. Ahead, a familiar beacon answers. For a moment, it feels like home.",
+    ],
+    quote: "Do not become its next light.",
+    image: "/worlds/null.jpg",
+    imageAlt: "A small cyan light against a dark field.",
+    caption: "The hungry dark",
+  },
+  {
+    number: "15",
+    name: "False Home",
+    note: "Only a relay",
+    kicker: "False home",
+    title: "Only a relay",
+    paragraphs: [
+      "The beacon is not home. It is a relay, repeating a call from somewhere else.",
+      "Its answer opens a route into an ancient transit network. The place Spark trusted was only passing the message on.",
+    ],
+    quote: "The place was only repeating a message.",
+    image: "/worlds/false-home.jpg",
+    imageAlt: "A ring of light that is not the destination.",
+    caption: "The false beacon",
+  },
+  {
+    number: "16",
+    name: "Ancient Network",
+    note: "The same pulse",
+    kicker: "The network",
+    title: "The same pulse",
+    paragraphs: [
+      "The relay opens a route into an ancient network. Its moving apertures respond to the same pulse Spark carries.",
+      "He has to reach the central mechanism to learn where the signal began.",
+    ],
+    quote: "The apertures answer his pulse.",
+    image: "/worlds/network.jpg",
+    imageAlt: "Spark approaching a ringed opening of gold light.",
+    caption: "The lattice",
+  },
+  {
+    number: "17",
+    name: "The Machine",
+    note: "Home has a name",
+    kicker: "The Key",
+    title: "Home has a name",
+    paragraphs: [
+      "The network carries him to its central mechanism. The machine recognizes his pulse. Its rings align into a map and trace the signal back to a luminous world.",
+      "For the first time, the call has a name. Luma. For the first time, Spark can see the way.",
+    ],
+    quote: "A name turns longing into a destination.",
+    image: "/worlds/machine.jpg",
+    imageAlt: "A golden opening onto a distant city of light, with Spark approaching.",
+    caption: "A signal. A name. A way forward.",
+  },
+  {
+    number: "18",
+    name: "The Signal",
+    note: "The way is set",
+    kicker: "The signal",
+    title: "The way is set",
+    paragraphs: [
+      "True coordinates resolve across the last distance. The Key has revealed Luma.",
+      "Across the final gates, luminous structures echo Spark's own energy. The challenges are familiar. Now he knows where he belongs.",
+    ],
+    quote: "For the first time, Spark can see the way.",
+    image: "/worlds/signal.jpg",
+    imageAlt: "A luminous city seen through a dark opening.",
+    caption: "Course for Luma",
+  },
+  {
+    number: "19",
+    name: "Homeward",
+    note: "The last distance",
+    kicker: "Homeward",
+    title: "The last distance",
+    paragraphs: [
+      "Familiar gates guard the last of the route. Spark crosses them knowing the name of the world ahead.",
+      "Luminous fields come into view. Lights gather beyond the arrival gates, waiting to answer him.",
+    ],
+    quote: "The distant signal is almost a chorus.",
+    image: "/worlds/homeward-fields.jpg",
+    imageAlt: "Spark before a luminous city.",
+    caption: "The arrival gates",
+  },
+  {
+    number: "20",
+    name: "Luma",
+    note: "Home at last",
+    kicker: "Luma",
+    title: "You were never the only light",
+    paragraphs: [
+      "Spark crosses the final gate. Lights rise from the luminous fields to meet him, each one answering the pulse he carried all this way.",
+      "The distant signal becomes a chorus. Spark is home. Beyond the reunion, the voyage does not have to end.",
+    ],
+    quote: "Spark is home.",
+    image: "/worlds/luma.jpg",
+    imageAlt: "A luminous city seen through a dark opening, with Spark in front.",
+    caption: "Home at last",
+  },
+];
+---
+
+<Base title="Spark's Story" description={description}>
+  <script is:inline>
+    if (sessionStorage.getItem("spark-story") === "open") {
+      document.documentElement.dataset.story = "open";
+    }
+  </script>
+  <noscript>
+    <style>
+      .spoiler { display: none !important; }
+      .story-fallback { display: block !important; }
+    </style>
+  </noscript>
+
+  <div class="spoiler" role="dialog" aria-modal="true" aria-labelledby="spoiler-title">
+    <div class="spoiler-card">
+      <p class="kicker">Spoiler alert</p>
+      <h1 id="spoiler-title">This story includes the ending.</h1>
+      <p>
+        Spark's journey is told here from the capture to Luma. If you would rather find the ending
+        in the game, turn back.
+      </p>
+      <div class="spoiler-actions">
+        <button class="btn" type="button" id="open-story">Read the story</button>
+        <a href="/">Not yet</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-fallback">
+    <p class="kicker">Spark's story</p>
+    <h1>The journey to Luma</h1>
+    {
+      chapters.map((chapter) => (
+        <article>
+          <h2>{chapter.title}</h2>
+          {chapter.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="book-stage" hidden>
+    <div class="story-shell">
+      <nav class="story-index" aria-label="Chapters">
+        <p>Spark's story</p>
+        <ol>
+          {
+            chapters.map((chapter, index) => (
+              <li>
+                <button type="button" data-chapter={index}>
+                  <span class="chap-dot" aria-hidden="true"></span>
+                  <span class="chap-num">{chapter.number}</span>
+                  <span>
+                    <strong>{chapter.name}</strong>
+                    <small>{chapter.note}</small>
+                  </span>
+                </button>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <div class="book-wrap">
+        <button class="page-arrow prev" type="button" id="page-prev" aria-label="Previous chapter">‹</button>
+        <div class="book" id="book">
+          <div class="spread" id="spread">
+            <article class="leaf leaf-left" id="leaf-left"></article>
+            <article class="leaf leaf-right" id="leaf-right"></article>
+          </div>
+        </div>
+        <button class="page-arrow next" type="button" id="page-next" aria-label="Next chapter">›</button>
+        <ol class="thumbs">
+          {
+            chapters.map((chapter, index) => (
+              <li>
+                <button type="button" data-chapter={index}>
+                  <img src={chapter.image} alt="" />
+                  <small>{index + 1}. {chapter.name}</small>
+                </button>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <aside class="story-rail">
+        <p>Small light.<br />Infinite<br />possibilities.</p>
+        <blockquote>“Every world brings you closer.”</blockquote>
+      </aside>
+    </div>
+  </div>
+
+  <script id="story-data" type="application/json" set:html={JSON.stringify(chapters)} />
+  <script>
+    const storageKey = "spark-story";
+    const chapters = JSON.parse(document.getElementById("story-data")?.textContent || "[]");
+    const spoiler = document.querySelector(".spoiler");
+    const stage = document.querySelector(".book-stage");
+    const spread = document.getElementById("spread");
+    const leftLeaf = document.getElementById("leaf-left");
+    const rightLeaf = document.getElementById("leaf-right");
+    const prev = document.getElementById("page-prev");
+    const next = document.getElementById("page-next");
+    const openButton = document.getElementById("open-story");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const narrow = window.matchMedia("(max-width: 980px)");
+    const chapterButtons = [...document.querySelectorAll("[data-chapter]")];
+
+    let index = 0;
+    let turning = false;
+
+    const escapeHtml = (value) =>
+      String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+
+    function plateHtml(chapter) {
+      return `<figure class="plate">
+        <img src="${escapeHtml(chapter.image)}" alt="${escapeHtml(chapter.imageAlt)}" />
+        <figcaption>${escapeHtml(chapter.caption)}</figcaption>
+      </figure>`;
+    }
+
+    function textHtml(chapter, chapterIndex) {
+      return `<div class="leaf-top"><span>Chapter ${chapterIndex + 1}</span><span>${chapterIndex + 1} of ${chapters.length}</span></div>
+        <p class="chapter">${escapeHtml(chapter.kicker)}</p>
+        <h2>${escapeHtml(chapter.title)}</h2>
+        <div class="prose">${chapter.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}</div>
+        <p class="pull">“${escapeHtml(chapter.quote)}”</p>`;
+    }
+
+    function render() {
+      const chapter = chapters[index];
+      if (!chapter || !leftLeaf || !rightLeaf) return;
+      leftLeaf.innerHTML = textHtml(chapter, index);
+      rightLeaf.innerHTML = plateHtml(chapter);
+      for (const button of chapterButtons) {
+        const current = Number(button.getAttribute("data-chapter")) === index;
+        if (current) button.setAttribute("aria-current", "true");
+        else button.removeAttribute("aria-current");
+      }
+      if (prev instanceof HTMLButtonElement) prev.disabled = index <= 0;
+      if (next instanceof HTMLButtonElement) next.disabled = index >= chapters.length - 1;
+      keepVisible(`.story-index button[data-chapter="${index}"]`);
+      keepVisible(`.thumbs button[data-chapter="${index}"]`);
+    }
+
+    function keepVisible(selector: string) {
+      const button = document.querySelector(selector);
+      const scroller = button?.closest("ol");
+      if (!(button instanceof HTMLElement) || !(scroller instanceof HTMLElement)) return;
+      const scrollerBox = scroller.getBoundingClientRect();
+      const buttonBox = button.getBoundingClientRect();
+      if (scroller.classList.contains("thumbs")) {
+        scroller.scrollLeft += buttonBox.left - scrollerBox.left - scroller.clientWidth / 2 + buttonBox.width / 2;
+      } else {
+        scroller.scrollTop += buttonBox.top - scrollerBox.top - scroller.clientHeight / 2 + buttonBox.height / 2;
+      }
+    }
+
+    function go(nextIndex: number) {
+      if (turning || nextIndex === index || nextIndex < 0 || nextIndex >= chapters.length) return;
+      if (reduceMotion.matches || narrow.matches || !(rightLeaf instanceof HTMLElement) || !(leftLeaf instanceof HTMLElement)) {
+        index = nextIndex;
+        render();
+        return;
+      }
+      turning = true;
+      const forward = nextIndex > index;
+      const page = rightLeaf;
+      const text = leftLeaf;
+      page.style.transition = "transform 0.28s ease";
+      page.style.transformOrigin = "left center";
+      text.style.transition = "opacity 0.2s ease";
+      text.style.opacity = "0";
+      page.style.transform = forward ? "rotateY(-86deg)" : "rotateY(86deg)";
+      window.setTimeout(() => {
+        index = nextIndex;
+        render();
+        page.style.transition = "none";
+        page.style.transform = forward ? "rotateY(86deg)" : "rotateY(-86deg)";
+        requestAnimationFrame(() => {
+          page.style.transition = "transform 0.28s ease";
+          page.style.transform = "rotateY(0deg)";
+          text.style.opacity = "1";
+          window.setTimeout(() => {
+            page.style.transition = "";
+            page.style.transform = "";
+            text.style.transition = "";
+            text.style.opacity = "";
+            turning = false;
+          }, 300);
+        });
+      }, 270);
+    }
+
+    function openBook() {
+      sessionStorage.setItem(storageKey, "open");
+      document.documentElement.dataset.story = "open";
+      spoiler?.setAttribute("hidden", "");
+      stage?.removeAttribute("hidden");
+      render();
+      if (next instanceof HTMLButtonElement) next.focus();
+    }
+
+    openButton?.addEventListener("click", openBook);
+    prev?.addEventListener("click", () => go(index - 1));
+    next?.addEventListener("click", () => go(index + 1));
+    for (const button of chapterButtons) {
+      button.addEventListener("click", () => go(Number(button.getAttribute("data-chapter"))));
+    }
+
+    document.addEventListener("keydown", (event) => {
+      const modalOpen = spoiler && !spoiler.hasAttribute("hidden");
+      if (modalOpen && event.key === "Escape") {
+        window.location.href = "/";
+        return;
+      }
+      if (modalOpen || turning) return;
+      if (event.key === "ArrowRight") go(index + 1);
+      if (event.key === "ArrowLeft") go(index - 1);
+    });
+
+    if (document.documentElement.dataset.story === "open") openBook();
+    else if (openButton instanceof HTMLButtonElement) openButton.focus();
+  </script>
+</Base>

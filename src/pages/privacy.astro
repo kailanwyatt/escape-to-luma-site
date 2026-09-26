@@ -1,0 +1,135 @@
+---
+import Base from "../layouts/Base.astro";
+import Notice from "../components/Notice.astro";
+import { site } from "../config";
+
+const description = `Privacy policy for ${site.name}, published by ${site.publisher}. The game stores progress on your device and does not create an account.`;
+---
+
+<Base title="Privacy Policy" description={description}>
+  <article class="doc">
+    <p class="kicker">Privacy Policy</p>
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated {site.updated}</p>
+    <Notice />
+
+    <h2>The short version</h2>
+    <p>
+      {site.name} does not ask you to create an account. Your progress stays on your device. We do
+      not receive that save, and we do not sell personal information. When advertising is turned on,
+      Google AdMob may receive an advertising identifier to show ads. Purchases are handled by Apple
+      or Google.
+    </p>
+
+    <h2>Who we are</h2>
+    <p>
+      {site.publisher} publishes {site.name} for iOS and Android. The app id on both stores is
+      <span>{site.bundleId}</span>. Privacy questions go to
+      <a href={`mailto:${site.email}`}>{site.email}</a>.
+    </p>
+
+    <h2>What the app does not collect</h2>
+    <p>
+      The app does not ask for your name, email address, phone number, contacts, photos, precise
+      location, or microphone. It does not create an account. It does not add its own encryption
+      beyond what the phone already provides. The iOS build declares that it does not use
+      non-exempt encryption.
+    </p>
+    <p>
+      On Android, the app may use permission to change audio settings so game sound can follow the
+      game's own volume. It does not record audio.
+    </p>
+
+    <h2>Information stored on your device</h2>
+    <p>
+      The game stores your progress on the phone or tablet. That includes levels you have reached,
+      scores, energy, shards, cosmetics you have unlocked, settings, and related game state. The
+      on-device save is named {site.saveKey}. It is not uploaded to us.
+    </p>
+    <p>
+      If you delete the app, or clear the app's storage, that save is deleted with it. We cannot
+      restore it, because we never received a copy. The steps are on the
+      <a href="/data">Your Data</a> page.
+    </p>
+
+    <h2>Advertising</h2>
+    <p>
+      Store builds may show ads through Google AdMob. AdMob can receive an advertising identifier,
+      basic device and app information, and information about an ad that was shown or tapped. Google
+      handles that data under its own policy at
+      <a href="https://policies.google.com/privacy">policies.google.com/privacy</a>.
+    </p>
+    <p>
+      How ads appear is in the <a href="/advertising">Advertising Policy</a>. Rewarded ads are
+      optional. Interstitial ads run between attempts, not while you are aiming and not while Spark
+      is in flight.
+    </p>
+    <p>
+      You can limit how ads use an identifier in your device settings. On iPhone, you can refuse a
+      tracking request if one appears, turn off Allow Apps to Request to Track, and reset the
+      advertising identifier. On Android, you can delete the advertising ID or opt out of ads
+      personalization. Ads can still appear.
+    </p>
+    <p>
+      If you buy Remove Ads, forced interstitial ads stop. You can still choose to watch a rewarded
+      ad.
+    </p>
+
+    <h2>Purchases</h2>
+    <p>
+      Energy, shards, cosmetics, and Remove Ads are offered, when they are offered, through the
+      Apple App Store or Google Play. Apple or Google processes the payment. We do not receive your
+      card number or full payment account details. The store may tell the game, on your device,
+      that a purchase succeeded so it can unlock what you bought.
+    </p>
+
+    <h2>Analytics</h2>
+    <p>
+      The app does not send gameplay or diagnostic analytics to us. There is no remote analytics
+      service in the app. If a future version adds crash reports or gameplay diagnostics, this
+      policy will be updated before that version is released.
+    </p>
+
+    <h2>Children</h2>
+    <p>
+      {site.name} is not directed at children under 13. We do not knowingly collect personal
+      information from children. If you believe a child has emailed us personal information, write
+      to <a href={`mailto:${site.email}`}>{site.email}</a> and we will delete that correspondence.
+      The game does not give us an account or a profile to delete.
+    </p>
+
+    <h2>Selling personal information</h2>
+    <p>
+      We do not sell personal information, and we do not share it with data brokers. Advertising,
+      when it is enabled, is served by Google as described above. If you are a California resident,
+      you can email <a href={`mailto:${site.email}`}>{site.email}</a> with a privacy request. In
+      the ordinary case, the only information we hold is an email you chose to send.
+    </p>
+
+    <h2>Email you send us</h2>
+    <p>
+      If you email {site.email}, we use that message to answer you and keep the correspondence in
+      our email account. You can ask us to delete it. We do not use it as a marketing list.
+    </p>
+
+    <h2>Other companies</h2>
+    <p>
+      Apple, Google Play, and Google AdMob may process purchase and advertising data in the
+      countries where they operate, under their own terms. We do not run a server that receives
+      your game save.
+    </p>
+
+    <h2>Changes</h2>
+    <p>
+      If this policy changes, the date at the top will change and the new version will be posted on
+      this page. A change that affects advertising or analytics will be posted here before the
+      matching app version is released.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      {site.publisher}<br />
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
+  </article>
+</Base>

@@ -1,0 +1,52 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../config";
+
+const description = `Support for ${site.name}. Email ${site.publisher} at ${site.email}.`;
+---
+
+<Base title="Support" description={description}>
+  <article class="doc">
+    <p class="kicker">Support</p>
+    <h1>Support</h1>
+    <p>
+      {site.name} is coming soon to the App Store and Google Play. This is the support page for
+      the game.
+    </p>
+
+    <h2>Write to us</h2>
+    <p>
+      Email <a href={`mailto:${site.email}`}>{site.email}</a>. {site.publisher} reads that address.
+    </p>
+    <p>In your note, include:</p>
+    <ul>
+      <li>What you expected to happen</li>
+      <li>What happened instead</li>
+      <li>Your device model</li>
+      <li>Your operating system version</li>
+      <li>The app version, if the game shows it</li>
+    </ul>
+    <p>A screenshot helps when the question is about a level or a purchase.</p>
+
+    <h2>Progress</h2>
+    <p>
+      The game does not have an account. Your journey is saved on the device only. We cannot look
+      up a save, move it to a new phone, or restore it after the app is deleted. How to erase that
+      save is on <a href="/data">Your Data</a>.
+    </p>
+
+    <h2>Purchases</h2>
+    <p>
+      Purchases, when the game offers them, are billed by Apple or Google. For a refund, start in
+      that store's purchase history. If a purchase unlocked the wrong thing, email us and include
+      the store order number if you have it. Do not send a full card number.
+    </p>
+
+    <h2>Policies</h2>
+    <p>
+      <a href="/privacy">Privacy Policy</a>,
+      <a href="/advertising">Advertising Policy</a>, and
+      <a href="/terms">Terms of Use</a> are published with this site.
+    </p>
+  </article>
+</Base>

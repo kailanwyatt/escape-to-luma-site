@@ -1,0 +1,178 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../config";
+
+const description =
+  "A small spark. A long way home. Aim, time the opening, and launch Spark through ten worlds. Coming soon to the App Store and Google Play.";
+
+const worlds = [
+  { src: "/worlds/containment.jpg", index: "World 1", name: "Containment", note: "The laboratory" },
+  { src: "/worlds/city.jpg", index: "World 2", name: "The City", note: "First sky" },
+  { src: "/worlds/sky.jpg", index: "World 3", name: "The Sky", note: "Moving rings" },
+  { src: "/worlds/orbit.jpg", index: "World 5", name: "Orbit", note: "Low gravity" },
+  { src: "/worlds/homeward.jpg", index: "World 10", name: "Homeward", note: "The signal" },
+];
+
+const steps = [
+  { n: "01", title: "Aim", body: "Drag a line through the moving opening. Spark is a living pulse, not a ball you tap along a path." },
+  { n: "02", title: "Time it", body: "Rotors, gates, rings, and beams keep moving. Wait until the gap will still be there when Spark arrives." },
+  { n: "03", title: "Launch", body: "Release. Ten worlds and 150 levels stand between the laboratory and Luma. After that, Endless Voyage." },
+];
+
+const play = [
+  { title: "Drag to aim", body: "Set the line before you commit." },
+  { title: "Read the opening", body: "The safe gap changes size and place." },
+  { title: "Release to launch", body: "Spark flies. You do not steer mid-flight." },
+  { title: "Follow the signal", body: "Each world ends closer to home." },
+];
+
+const faqs = [
+  {
+    q: "When can I play?",
+    a: "Spark: Escape to Luma is coming soon to the App Store and Google Play. There is no download yet.",
+  },
+  {
+    q: "How do you play?",
+    a: "Drag to aim, watch the opening, then release to launch. You are guiding Spark through a gap, not tapping a route across the screen.",
+  },
+  {
+    q: "Do I need an account?",
+    a: "No. Progress stays on the device. There is no login and no cloud copy of the save.",
+  },
+  {
+    q: "Will there be ads?",
+    a: "The store build can show optional rewarded ads, and interstitial ads between runs. Ads are not shown while you aim or while Spark is in flight. Remove Ads stops the forced interstitials. Details are on the Advertising Policy page.",
+  },
+];
+---
+
+<Base description={description} home>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="kicker">Journey home</p>
+      <h1 id="hero-title">
+        <span class="hero-small">A small</span>
+        Spark
+        <span class="hero-line">goes a long way</span>
+      </h1>
+      <p class="blurb">
+        Guide Spark out of the lab that captured it. Read each moving opening, then launch. Ten
+        worlds stand between the facility and the signal it calls home.
+      </p>
+      <p class="soon-row">
+        <span>Coming soon on the App Store</span>
+        <span>Coming soon on Google Play</span>
+      </p>
+      <p class="tagline">{site.tagline}</p>
+    </div>
+  </section>
+
+  <section class="band" id="features">
+    <div class="band-copy">
+      <p class="kicker">Play</p>
+      <h2>Predict. Adapt. Overcome.</h2>
+      <p>
+        One precise launch at a time. The opening is already moving when you let go, so the read
+        matters more than the speed.
+      </p>
+    </div>
+    <ol class="steps">
+      {
+        steps.map((step) => (
+          <li>
+            <span>{step.n}</span>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="band" id="worlds">
+    <div class="split">
+      <div class="band-copy">
+        <p class="kicker">Explore</p>
+        <h2>Ten worlds between the lab and Luma</h2>
+        <p>
+          Containment, the city, the sky, the upper atmosphere, orbit, the Moon, the asteroid belt,
+          the nebula, an ancient network, and the last gates home. One hundred and fifty levels.
+        </p>
+        <a class="btn" href="#gameplay">See how a launch works</a>
+      </div>
+      <ul class="worlds">
+        {
+          worlds.map((world) => (
+            <li>
+              <img src={world.src} alt="" />
+              <p>
+                <span>{world.index}</span>
+                {world.name}
+                <small>{world.note}</small>
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" id="gameplay">
+    <div class="play-grid">
+      <div class="band-copy">
+        <p class="kicker">Simple to play</p>
+        <h2>Learn the opening. Master the journey.</h2>
+        <p>
+          Each level asks for one clean launch. The obstacles change. The job does not: see the gap,
+          time it, and send Spark through.
+        </p>
+        <ul class="play-list">
+          {
+            play.map((item) => (
+              <li>
+                <strong>{item.title}</strong>
+                <span>{item.body}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="phones" aria-hidden="true">
+        <img src="/worlds/containment.jpg" alt="" />
+        <img src="/worlds/sky.jpg" alt="" />
+        <img src="/worlds/homeward.jpg" alt="" />
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="faq">
+    <div class="band-copy">
+      <p class="kicker">Questions</p>
+      <h2>Before the journey starts</h2>
+    </div>
+    <div class="faqs">
+      {
+        faqs.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="close" id="soon">
+    <div class="close-copy">
+      <h2>The signal is still far away</h2>
+      <p>
+        Clear the campaign and the journey continues in Endless Voyage. {site.tagline}
+      </p>
+      <p><a href="/story">Read Spark's story</a></p>
+      <p class="soon-row">
+        <span>Coming soon on the App Store</span>
+        <span>Coming soon on Google Play</span>
+      </p>
+    </div>
+  </section>
+</Base>

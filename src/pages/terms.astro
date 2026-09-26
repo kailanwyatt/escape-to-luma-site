@@ -1,0 +1,111 @@
+---
+import Base from "../layouts/Base.astro";
+import Notice from "../components/Notice.astro";
+import { site } from "../config";
+
+const description = `Terms of use for ${site.name}, published by ${site.publisher}.`;
+---
+
+<Base title="Terms of Use" description={description}>
+  <article class="doc">
+    <p class="kicker">Terms of Use</p>
+    <h1>Terms of Use</h1>
+    <p class="updated">Last updated {site.updated}</p>
+    <Notice />
+    <p>
+      These terms are between you and {site.publisher} for {site.name} and for this website. The
+      app id is {site.bundleId}. If you do not agree, do not install the game or use the site.
+    </p>
+
+    <h2>The game</h2>
+    <p>
+      {site.name} is a precision game about guiding a living spark of energy home. It is coming
+      soon to the App Store and Google Play. A feature described on this site can change before
+      release, and a test build may turn some features off.
+    </p>
+
+    <h2>License</h2>
+    <p>
+      We grant you a personal, non-exclusive, non-transferable license to install and play the game
+      on devices you own or control, under the rules of the store you use. You do not own the game,
+      its art, the name Spark, or its story. You may not copy the game for sale, or modify it,
+      except where the law does not allow that limit.
+    </p>
+
+    <h2>No account</h2>
+    <p>
+      The game does not create an account. Progress is stored on your device. We cannot sign you in
+      on a new phone, and we cannot recover a save after you delete the app. See
+      <a href="/data">Your Data</a>.
+    </p>
+
+    <h2>Virtual items</h2>
+    <p>
+      Shards, energy, timed unlimited energy, boosts, and cosmetic sparks and trails exist only
+      inside the game. They are a license to use a feature, not a balance of money. They have no
+      cash value, and they cannot be transferred or redeemed outside the game. An update may change
+      how they work, including cost and availability.
+    </p>
+
+    <h2>Purchases</h2>
+    <p>
+      When the game offers a purchase, Apple or Google charges you and keeps the payment record. We
+      do not receive your card number. A refund is requested from Apple or Google under that
+      store's rules. Remove Ads stops forced interstitial ads and does not stop optional rewarded
+      ads. The details are in the <a href="/advertising">Advertising Policy</a>.
+    </p>
+
+    <h2>Advertising</h2>
+    <p>
+      A store build may show ads as described in the Advertising Policy. That policy is part of
+      these terms.
+    </p>
+
+    <h2>Acceptable use</h2>
+    <p>
+      Do not attack the game or other people through it, do not misuse the support email, and do
+      not use the game or this site to break the law.
+    </p>
+
+    <h2>This website</h2>
+    <p>
+      This site describes the game and publishes the privacy, advertising, terms, support, and data
+      pages. It does not create an account.
+    </p>
+
+    <h2>App stores</h2>
+    <p>
+      If you download the game from Apple, Apple is not a party to these terms and is not
+      responsible for the game or for a claim you have about it. Apple's licensed application terms
+      still apply where Apple requires them. If you download it from Google, Google is not
+      responsible for the game. The store you used can enforce its own rules, including payment
+      rules.
+    </p>
+
+    <h2>Disclaimer</h2>
+    <p>
+      The game and this site are provided as they are. We do not promise uninterrupted play, that a
+      level will stay unchanged, or that a coming-soon feature will ship on a particular date.
+    </p>
+
+    <h2>Limitation</h2>
+    <p>
+      To the extent the law allows, {site.publisher} is not liable for indirect or consequential
+      damages, or for progress that existed only on your device. These terms do not limit a right
+      that the law says cannot be limited.
+    </p>
+
+    <h2>Changes</h2>
+    <p>
+      We may update these terms by posting a new version on this page and changing the date.
+      Playing a later version means you accept the terms posted for it. If you do not accept them,
+      stop using the game and delete it.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      {site.publisher}<br />
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
+  </article>
+</Base>
