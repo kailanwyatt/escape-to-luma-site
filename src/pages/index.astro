@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import { site } from "../config";
 
 const description =
-  "A small spark. A long way home. Aim, time the opening, and launch Spark through ten worlds. Coming soon to the App Store and Google Play.";
+  "A small spark. A long way home. Aim, time the opening, and launch Spark through ten worlds. Available on the App Store. Coming soon to Google Play.";
 
 const worlds = [
   { src: "/worlds/containment.jpg", index: "World 1", name: "Containment", note: "The laboratory" },
@@ -29,7 +29,7 @@ const play = [
 const faqs = [
   {
     q: "When can I play?",
-    a: "Spark: Escape to Luma is coming soon to the App Store and Google Play. There is no download yet.",
+    a: "Spark: Escape to Luma is available on the App Store. Google Play is still coming soon.",
   },
   {
     q: "How do you play?",
@@ -60,7 +60,7 @@ const faqs = [
         worlds stand between the facility and the signal it calls home.
       </p>
       <p class="soon-row">
-        <span>Coming soon on the App Store</span>
+        <a href={site.appStoreUrl}>Download on the App Store</a>
         <span>Coming soon on Google Play</span>
       </p>
       <p class="tagline">{site.tagline}</p>
@@ -170,7 +170,7 @@ const faqs = [
       </p>
       <p><a href="/story">Read Spark's story</a></p>
       <p class="soon-row">
-        <span>Coming soon on the App Store</span>
+        <a href={site.appStoreUrl}>Download on the App Store</a>
         <span>Coming soon on Google Play</span>
       </p>
     </div>

@@ -313,6 +313,7 @@ a:focus-visible {
   margin: 1.4rem 0 0;
 }
 
+.soon-row a,
 .soon-row span {
   padding: 0.55rem 0.8rem;
   border: 1px solid rgba(255, 184, 0, 0.45);
@@ -320,6 +321,12 @@ a:focus-visible {
   color: var(--cream);
   font-size: 0.82rem;
   font-weight: 700;
+  text-decoration: none;
+}
+
+.soon-row a {
+  background: linear-gradient(180deg, #ffd54a 0%, #ffb800 45%, #ff8a00 100%);
+  color: #1a1204;
 }
 
 .tagline {
