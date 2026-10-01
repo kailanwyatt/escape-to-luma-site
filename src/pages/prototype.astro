@@ -1,0 +1,80 @@
+---
+import "../styles/global.css";
+
+const description = "The first Spark prototype: throw a ball through a rotating fan blade.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prototype · Spark: Escape to Luma</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#050B15" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+  </head>
+  <body class="proto">
+    <a class="skip" href="#build">Skip to the prototype</a>
+    <header class="proto-bar">
+      <p>The first prototype. One blade, then two, then three.</p>
+      <a href="/origin">Back to how it started</a>
+    </header>
+    <iframe id="build" title="The first Spark prototype" src="/game2/"></iframe>
+  </body>
+</html>
+
+<style>
+  body.proto {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .proto-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex: 0 0 auto;
+    min-height: 2.75rem;
+    padding: 0.45rem var(--gutter);
+    background: rgba(5, 11, 21, 0.94);
+    border-bottom: 1px solid rgba(0, 204, 255, 0.14);
+  }
+
+  .proto-bar p {
+    margin: 0;
+    color: var(--cream-muted);
+    font-size: 0.92rem;
+  }
+
+  .proto-bar a {
+    flex: 0 0 auto;
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  .proto-bar a:hover {
+    color: var(--cyan-bright);
+  }
+
+  iframe {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 0;
+    border: 0;
+    background: var(--ink);
+  }
+
+  @media (max-width: 720px) {
+    .proto-bar {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding-top: 0.55rem;
+      padding-bottom: 0.55rem;
+    }
+  }
+</style>
