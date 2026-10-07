@@ -1,0 +1,241 @@
+---
+import Base from "../layouts/Base.astro";
+
+const description =
+  "Play Endless Voyage, Spark: Escape to Luma's replayable browser Arcade mode. Read the opening, aim ahead, and launch.";
+---
+
+<Base title="Arcade" description={description}>
+  <section class="arcade-game" id="game" aria-labelledby="game-title" data-arcade-game data-view="phone">
+    <div class="arcade-game-heading">
+      <div>
+        <p class="kicker">Live signal // Endless Voyage</p>
+        <h2 id="game-title">Enter the opening</h2>
+      </div>
+      <div class="arcade-game-actions">
+        <p>Drag to aim. Release to launch.</p>
+        <button
+          class="arcade-view-toggle"
+          type="button"
+          aria-label="Expand the game to wide view"
+          aria-pressed="false"
+          data-arcade-view-toggle
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5" />
+          </svg>
+          <span data-arcade-view-label>Wide view</span>
+        </button>
+      </div>
+    </div>
+    <div class="arcade-cabinet">
+      <iframe
+        title="Spark Arcade: Endless Voyage"
+        src="/arcade/game/index.html"
+        allow="autoplay; fullscreen"
+        loading="eager"
+      ></iframe>
+    </div>
+  </section>
+
+  <section class="arcade-rules" aria-labelledby="rules-title">
+    <div>
+      <p class="kicker">How to play</p>
+      <h2 id="rules-title">One launch. One opening.</h2>
+    </div>
+    <ol>
+      <li><strong>Aim ahead.</strong> The target keeps moving after Spark leaves.</li>
+      <li><strong>Wait for the gap.</strong> Timing matters more than speed.</li>
+      <li><strong>Build your run.</strong> Three hearts, one score, no campaign energy.</li>
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .arcade-game,
+  .arcade-rules {
+    width: min(100% - 2 * var(--gutter), 70rem);
+    margin-inline: auto;
+  }
+
+  .arcade-game {
+    padding: 2.4rem 0 4.5rem;
+    transition: width 180ms ease;
+  }
+
+  .arcade-game[data-view="wide"] {
+    width: calc(100% - 2 * var(--gutter));
+  }
+
+  .arcade-game-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 auto 1.1rem;
+    max-width: 31rem;
+  }
+
+  .arcade-game-heading h2,
+  .arcade-rules h2 {
+    margin: 0.2rem 0 0;
+  }
+
+  .arcade-game-actions {
+    display: grid;
+    justify-items: end;
+    gap: 0.55rem;
+  }
+
+  .arcade-game-actions > p {
+    margin: 0;
+    color: var(--cream-muted);
+    font-size: 0.9rem;
+    text-align: right;
+  }
+
+  .arcade-view-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.52rem;
+    min-height: 2.45rem;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid rgba(0, 204, 255, 0.44);
+    border-radius: 0.35rem;
+    background: linear-gradient(135deg, rgba(18, 45, 65, 0.9), rgba(5, 14, 26, 0.94));
+    box-shadow: inset 0 0 1rem rgba(0, 204, 255, 0.08);
+    color: var(--cream-muted);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+  }
+
+  .arcade-view-toggle svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    color: var(--cyan-bright);
+  }
+
+  .arcade-view-toggle:hover,
+  .arcade-view-toggle[aria-pressed="true"] {
+    border-color: var(--cyan-bright);
+    background: rgba(0, 204, 255, 0.18);
+    color: var(--cream);
+  }
+
+  .arcade-view-toggle:focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+  }
+
+  .arcade-cabinet {
+    width: min(100%, 31rem);
+    aspect-ratio: 9 / 16;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid rgba(0, 204, 255, 0.62);
+    border-radius: 1rem;
+    background: #050b15;
+    box-shadow: 0 0 0 1px rgba(255, 210, 74, 0.14), 0 1.2rem 3.8rem rgba(0, 204, 255, 0.16);
+  }
+
+  .arcade-cabinet iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #050b15;
+  }
+
+  .arcade-game[data-view="wide"] .arcade-game-heading {
+    max-width: none;
+  }
+
+  .arcade-game[data-view="wide"] .arcade-cabinet {
+    width: 100%;
+    height: min(78svh, 54rem);
+    aspect-ratio: auto;
+    max-width: none;
+  }
+
+  .arcade-rules {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 3rem;
+    padding: 3.6rem 0 5rem;
+    border-top: 1px solid rgba(0, 204, 255, 0.16);
+  }
+
+  .arcade-rules ol {
+    display: grid;
+    gap: 0.85rem;
+    margin: 0;
+    padding-left: 1.4rem;
+  }
+
+  .arcade-rules li {
+    padding-left: 0.35rem;
+    color: var(--cream-muted);
+  }
+
+  .arcade-rules strong {
+    color: var(--cream);
+  }
+
+  @media (max-width: 760px) {
+    .arcade-game {
+      padding-top: 2rem;
+    }
+
+    .arcade-game-heading {
+      align-items: start;
+      flex-direction: column;
+    }
+
+    .arcade-game-actions {
+      justify-items: start;
+    }
+
+    .arcade-game-actions > p {
+      text-align: left;
+    }
+
+    .arcade-cabinet {
+      border-radius: 0.75rem;
+    }
+
+    .arcade-game[data-view="wide"] .arcade-cabinet {
+      height: 78svh;
+      min-height: 30rem;
+    }
+
+    .arcade-rules {
+      grid-template-columns: 1fr;
+      gap: 1.4rem;
+    }
+  }
+</style>
+
+<script>
+  const game = document.querySelector<HTMLElement>("[data-arcade-game]");
+  const toggle = document.querySelector<HTMLButtonElement>("[data-arcade-view-toggle]");
+  const label = document.querySelector<HTMLElement>("[data-arcade-view-label]");
+
+  if (game && toggle && label) {
+    toggle.addEventListener("click", () => {
+      const isWide = game.dataset.view !== "wide";
+      game.dataset.view = isWide ? "wide" : "phone";
+      toggle.setAttribute("aria-pressed", String(isWide));
+      toggle.setAttribute(
+        "aria-label",
+        isWide ? "Return the game to phone view" : "Expand the game to wide view",
+      );
+      label.textContent = isWide ? "Phone view" : "Wide view";
+    });
+  }
+</script>

@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { site } from "../../config";
+
+const description = `Release notes and news for ${site.name}.`;
+
+const posts = (await getCollection("news")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+---
+
+<Base title="News" description={description}>
+  <article class="doc">
+    <p class="kicker">Archive</p>
+    <h1>News</h1>
+    <p>Releases and notes from {site.publisher}.</p>
+    <ol class="archive">
+      {
+        posts.map((post) => (
+          <li>
+            <time datetime={post.data.date.toISOString().slice(0, 10)}>
+              {formatDate(post.data.date)}
+            </time>
+            <a href={`/news/${post.id}`}>{post.data.title}</a>
+            <p>{post.data.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </article>
+</Base>

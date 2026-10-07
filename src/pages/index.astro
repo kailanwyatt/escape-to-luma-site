@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import { site } from "../config";
 
 const description =
-  "A small spark. A long way home. Aim, time the opening, and launch Spark through ten worlds. Available on the App Store. Coming soon to Google Play.";
+  "A small spark. A long way home. Aim, time the opening, and launch Spark through ten worlds. Available on the App Store. The Android version is in review on Google Play.";
 
 const worlds = [
   { src: "/worlds/containment.jpg", index: "World 1", name: "Containment", note: "The laboratory" },
@@ -29,7 +29,7 @@ const play = [
 const faqs = [
   {
     q: "When can I play?",
-    a: "Spark: Escape to Luma is available on the App Store. Google Play is still coming soon.",
+    a: 'Spark: Escape to Luma is available on the App Store. The Android version is <a href="/news/play-store-review">in review on Google Play</a>.',
   },
   {
     q: "How do you play?",
@@ -61,7 +61,7 @@ const faqs = [
       </p>
       <p class="soon-row">
         <a href={site.appStoreUrl}>Download on the App Store</a>
-        <span>Coming soon on Google Play</span>
+        <a class="soon-wait" href="/news/play-store-review">In review on Google Play</a>
       </p>
       <p class="tagline">{site.tagline}</p>
     </div>
@@ -155,7 +155,7 @@ const faqs = [
         faqs.map((item) => (
           <details>
             <summary>{item.q}</summary>
-            <p>{item.a}</p>
+            <p set:html={item.a} />
           </details>
         ))
       }
@@ -171,7 +171,7 @@ const faqs = [
       <p><a href="/story">Read Spark's story</a></p>
       <p class="soon-row">
         <a href={site.appStoreUrl}>Download on the App Store</a>
-        <span>Coming soon on Google Play</span>
+        <a class="soon-wait" href="/news/play-store-review">In review on Google Play</a>
       </p>
     </div>
   </section>
