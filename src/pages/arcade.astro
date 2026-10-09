@@ -36,7 +36,7 @@ const gameSchema = {
     <div class="arcade-game-heading">
       <div>
         <p class="kicker">Live signal // Endless Voyage</p>
-        <h1 id="game-title">Spark Arcade: Endless Voyage</h1>
+        <h1 id="game-title"><span class="arcade-title-mode">Spark Arcade</span>: Endless Voyage</h1>
       </div>
       <div class="arcade-game-actions">
         <p>Drag to aim. Release to launch.</p>
@@ -52,6 +52,10 @@ const gameSchema = {
           </svg>
           <span data-arcade-view-label>Wide view</span>
         </button>
+        <a class="arcade-direct-launch" href="/arcade/game/" data-arcade-direct-launch>
+          <span aria-hidden="true">▶</span>
+          <span>Play direct</span>
+        </a>
       </div>
     </div>
     <div class="arcade-cabinet">
@@ -108,6 +112,10 @@ const gameSchema = {
     margin: 0.2rem 0 0;
   }
 
+  .arcade-title-mode {
+    white-space: nowrap;
+  }
+
   .arcade-game-actions {
     display: grid;
     justify-items: end;
@@ -160,11 +168,42 @@ const gameSchema = {
     outline-offset: 3px;
   }
 
+  .arcade-direct-launch {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.8rem;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid #ffe17a;
+    border-radius: 0.52rem;
+    background: linear-gradient(180deg, #ffd54a, #ffae00);
+    box-shadow: 0 0.7rem 1.5rem rgba(255, 174, 0, 0.2);
+    color: #1a1204;
+    font-size: 0.74rem;
+    font-weight: 850;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .arcade-direct-launch:hover {
+    color: #1a1204;
+    filter: brightness(1.06);
+  }
+
+  .arcade-direct-launch:focus-visible {
+    outline: 2px solid var(--cyan-bright);
+    outline-offset: 3px;
+  }
+
   .arcade-cabinet {
     width: min(100%, 31rem);
     aspect-ratio: 9 / 16;
     margin: 0 auto;
     overflow: hidden;
+    overscroll-behavior: contain;
+    touch-action: none;
     border: 1px solid rgba(0, 204, 255, 0.62);
     border-radius: 1rem;
     background: #050b15;
@@ -177,6 +216,8 @@ const gameSchema = {
     height: 100%;
     border: 0;
     background: #050b15;
+    overscroll-behavior: contain;
+    touch-action: none;
   }
 
   .arcade-game[data-view="wide"] .arcade-game-heading {
@@ -246,6 +287,12 @@ const gameSchema = {
       gap: 1.4rem;
     }
   }
+
+  @media (max-width: 760px) and (pointer: coarse) {
+    .arcade-direct-launch {
+      display: inline-flex;
+    }
+  }
 </style>
 
 <script>
@@ -253,6 +300,7 @@ const gameSchema = {
   const toggle = document.querySelector<HTMLButtonElement>("[data-arcade-view-toggle]");
   const label = document.querySelector<HTMLElement>("[data-arcade-view-label]");
   const frame = document.querySelector<HTMLIFrameElement>("[data-arcade-frame]");
+  const directLaunch = document.querySelector<HTMLAnchorElement>("[data-arcade-direct-launch]");
   type AnalyticsWindow = Window & {
     trackSparkEvent?: (eventName: string, parameters?: Record<string, string | number | boolean>) => void;
   };
@@ -278,6 +326,10 @@ const gameSchema = {
     const { eventName, parameters } = event.data;
     if (eventName !== "arcade_game_started" && eventName !== "arcade_run_finished") return;
     analyticsWindow.trackSparkEvent?.(eventName, parameters);
+  });
+
+  directLaunch?.addEventListener("click", () => {
+    analyticsWindow.trackSparkEvent?.("arcade_direct_launch", { placement: "mobile_direct" });
   });
 
   if (game && toggle && label) {
