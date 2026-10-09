@@ -60,6 +60,7 @@ const gameSchema = {
         src="/arcade/game/index.html"
         allow="autoplay; fullscreen"
         loading="eager"
+        data-arcade-frame
       ></iframe>
     </div>
   </section>
@@ -251,6 +252,33 @@ const gameSchema = {
   const game = document.querySelector<HTMLElement>("[data-arcade-game]");
   const toggle = document.querySelector<HTMLButtonElement>("[data-arcade-view-toggle]");
   const label = document.querySelector<HTMLElement>("[data-arcade-view-label]");
+  const frame = document.querySelector<HTMLIFrameElement>("[data-arcade-frame]");
+  type AnalyticsWindow = Window & {
+    trackSparkEvent?: (eventName: string, parameters?: Record<string, string | number | boolean>) => void;
+  };
+  const analyticsWindow = window as AnalyticsWindow;
+  let iframeLoaded = false;
+  let iframeLoadTracked = false;
+
+  function trackIframeLoad(): void {
+    if (!iframeLoaded || iframeLoadTracked) return;
+    iframeLoadTracked = true;
+    analyticsWindow.trackSparkEvent?.("arcade_game_loaded");
+  }
+
+  frame?.addEventListener("load", () => {
+    iframeLoaded = true;
+    trackIframeLoad();
+  });
+
+  document.addEventListener("spark-analytics-ready", trackIframeLoad);
+
+  window.addEventListener("message", (event) => {
+    if (event.origin !== window.location.origin || !event.data || event.data.source !== "spark-arcade") return;
+    const { eventName, parameters } = event.data;
+    if (eventName !== "arcade_game_started" && eventName !== "arcade_run_finished") return;
+    analyticsWindow.trackSparkEvent?.(eventName, parameters);
+  });
 
   if (game && toggle && label) {
     toggle.addEventListener("click", () => {
@@ -262,6 +290,7 @@ const gameSchema = {
         isWide ? "Return the game to phone view" : "Expand the game to wide view",
       );
       label.textContent = isWide ? "Phone view" : "Wide view";
+      analyticsWindow.trackSparkEvent?.("arcade_view_changed", { view: isWide ? "wide" : "phone" });
     });
   }
 </script>

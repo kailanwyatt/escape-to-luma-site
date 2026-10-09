@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { site } from "../config";
+import AnalyticsConsent from "../components/AnalyticsConsent.astro";
 
 interface Props {
   title?: string;
@@ -113,7 +114,33 @@ const sections = [
         © {new Date().getFullYear()} {site.publisher}
         {" · "}
         <a href={`mailto:${site.email}`}>{site.email}</a>
+        {" · "}
+        <button class="analytics-settings" type="button" data-analytics-settings>Analytics settings</button>
       </p>
     </footer>
+    <AnalyticsConsent />
   </body>
 </html>
+
+<style>
+  .analytics-settings {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--cyan);
+    cursor: pointer;
+    font: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  .analytics-settings:hover {
+    color: var(--cyan-bright);
+  }
+
+  .analytics-settings:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+  }
+</style>

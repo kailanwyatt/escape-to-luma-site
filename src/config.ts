@@ -7,10 +7,11 @@ export const site = {
   publisher: "n17 Apps",
   email: "game@escapetoluma.com",
   bundleId: "com.escapetoluma.spark",
+  analyticsMeasurementId: "G-10RVZ0MKX7",
   appStoreUrl: "https://apps.apple.com/us/app/spark-escape-to-luma/id6816341260",
   removeAdsProductId: "aperture_remove_ads",
   saveKey: "ball-game-cs.save.v1",
-  updated: "September 30, 2026",
+  updated: "October 8, 2026",
 } as const;
 
 /** Store-build ad pacing. Matches the game's interstitial config. */
