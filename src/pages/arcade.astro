@@ -1,16 +1,42 @@
 ---
 import Base from "../layouts/Base.astro";
+import { site } from "../config";
 
 const description =
-  "Play Endless Voyage, Spark: Escape to Luma's replayable browser Arcade mode. Read the opening, aim ahead, and launch.";
+  "Play Endless Voyage, the free browser Arcade mode for Spark: Escape to Luma. Read the moving opening, aim ahead, and launch to build a high score.";
+
+const gameSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  name: "Spark Arcade: Endless Voyage",
+  description,
+  url: `${site.url}/arcade`,
+  image: `${site.url}/og-arcade.jpg`,
+  genre: ["Arcade", "Precision"],
+  playMode: "SinglePlayer",
+  operatingSystem: "Web browser",
+  applicationCategory: "GameApplication",
+  isAccessibleForFree: true,
+  inLanguage: "en",
+  publisher: {
+    "@type": "Organization",
+    name: site.publisher,
+  },
+};
 ---
 
-<Base title="Arcade" description={description}>
+<Base
+  title="Play Endless Voyage – Free Browser Game"
+  description={description}
+  image="/og-arcade.jpg"
+  imageAlt="Spark races through a narrow opening between violet reaches toward a cyan portal in Endless Voyage."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(gameSchema)} />
   <section class="arcade-game" id="game" aria-labelledby="game-title" data-arcade-game data-view="phone">
     <div class="arcade-game-heading">
       <div>
         <p class="kicker">Live signal // Endless Voyage</p>
-        <h2 id="game-title">Enter the opening</h2>
+        <h1 id="game-title">Spark Arcade: Endless Voyage</h1>
       </div>
       <div class="arcade-game-actions">
         <p>Drag to aim. Release to launch.</p>
@@ -76,7 +102,7 @@ const description =
     max-width: 31rem;
   }
 
-  .arcade-game-heading h2,
+  .arcade-game-heading h1,
   .arcade-rules h2 {
     margin: 0.2rem 0 0;
   }

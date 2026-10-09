@@ -1,4 +1,5 @@
 export const site = {
+  url: "https://escapetoluma.com",
   name: "Spark: Escape to Luma",
   brand: "SPARK",
   productLine: "ESCAPE TO LUMA",
