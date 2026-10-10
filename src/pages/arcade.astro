@@ -307,24 +307,26 @@ const gameSchema = {
   const gameScriptEl = document.querySelector<HTMLScriptElement>("[data-arcade-script]");
   const directLaunch = document.querySelector<HTMLAnchorElement>("[data-arcade-direct-launch]");
   type AnalyticsWindow = Window & {
-    trackSparkEvent?: (eventName: string, parameters?: Record<string, string | number | boolean>) => void;
+    trackSparkEvent?: (eventName: string, parameters?: Record<string, string | number | boolean>) => boolean;
   };
   const analyticsWindow = window as AnalyticsWindow;
-  let gameReady = Boolean(root && root.childElementCount > 0);
   let gameLoadTracked = false;
 
   function trackGameLoad(): void {
-    if (!gameReady || gameLoadTracked || !analyticsWindow.trackSparkEvent) return;
+    if (gameLoadTracked || !root || root.childElementCount === 0) return;
+    if (!analyticsWindow.trackSparkEvent?.("arcade_game_loaded")) return;
     gameLoadTracked = true;
-    analyticsWindow.trackSparkEvent("arcade_game_loaded");
   }
 
-  gameScriptEl?.addEventListener("load", () => {
-    gameReady = true;
-    trackGameLoad();
-  });
-
+  gameScriptEl?.addEventListener("load", trackGameLoad);
   document.addEventListener("spark-analytics-ready", trackGameLoad);
+  if (root) {
+    const mountObserver = new MutationObserver(() => {
+      trackGameLoad();
+      if (gameLoadTracked) mountObserver.disconnect();
+    });
+    mountObserver.observe(root, { childList: true });
+  }
   trackGameLoad();
 
   window.addEventListener("message", (event) => {

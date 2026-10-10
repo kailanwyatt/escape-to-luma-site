@@ -6,7 +6,7 @@ import { site } from "../config";
   <div>
     <p class="analytics-consent__title">Help improve Spark</p>
     <p class="analytics-consent__copy">
-      With your permission, we use Google Analytics to understand site visits and Arcade play.
+      With your permission, we use Google Analytics to understand page visits, which links are used, and Arcade play.
       <a href="/privacy">Privacy policy</a>
     </p>
   </div>
@@ -112,88 +112,9 @@ import { site } from "../config";
   }
 </style>
 
-<script define:vars={{ measurementId: site.analyticsMeasurementId }}>
-  const storageKey = "spark.analytics-consent.v1";
-  const analyticsWindow = window;
-  const banner = document.querySelector("[data-analytics-consent]");
-  const accept = document.querySelector("[data-analytics-accept]");
-  const decline = document.querySelector("[data-analytics-decline]");
-  const settings = document.querySelector("[data-analytics-settings]");
-  let googleTagLoaded = false;
-  let consentState = readConsent();
-
-  function readConsent() {
-    try {
-      const value = window.localStorage.getItem(storageKey);
-      return value === "granted" || value === "denied" ? value : null;
-    } catch {
-      return null;
-    }
-  }
-
-  function persistConsent(value) {
-    try {
-      window.localStorage.setItem(storageKey, value);
-    } catch {
-      // The banner remains functional when storage is unavailable.
-    }
-  }
-
-  function loadGoogleAnalytics() {
-    if (googleTagLoaded || !measurementId) return;
-    googleTagLoaded = true;
-    analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
-    analyticsWindow.gtag = (...args) => analyticsWindow.dataLayer?.push(args);
-    analyticsWindow.gtag("consent", "default", {
-      analytics_storage: "denied",
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied",
-    });
-    analyticsWindow.gtag("consent", "update", { analytics_storage: "granted" });
-    analyticsWindow.gtag("js", new Date());
-    analyticsWindow.gtag("config", measurementId, {
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false,
-    });
-
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
-    script.dataset.sparkAnalytics = "true";
-    document.head.append(script);
-    document.dispatchEvent(new CustomEvent("spark-analytics-ready"));
-  }
-
-  analyticsWindow.trackSparkEvent = (eventName, parameters = {}) => {
-    if (consentState !== "granted") return;
-    analyticsWindow.gtag?.("event", eventName, parameters);
-  };
-
-  function applyConsent(value) {
-    consentState = value;
-    persistConsent(value);
-    if (banner) banner.hidden = true;
-    if (value === "granted") loadGoogleAnalytics();
-  }
-
-  const savedConsent = consentState;
-  if (savedConsent) {
-    if (savedConsent === "granted") loadGoogleAnalytics();
-  } else if (banner) {
-    banner.hidden = false;
-  }
-
-  accept?.addEventListener("click", () => applyConsent("granted"));
-  decline?.addEventListener("click", () => applyConsent("denied"));
-  settings?.addEventListener("click", () => {
-    if (banner) banner.hidden = false;
-  });
-
-  document.addEventListener("click", (event) => {
-    const link = event.target?.closest?.('a[href*="apps.apple.com"]');
-    if (!link) return;
-    const placement = link.closest("header") ? "header" : link.closest("footer") ? "footer" : "page";
-    analyticsWindow.trackSparkEvent?.("app_store_click", { placement });
-  });
-</script>
+<script
+  is:inline
+  defer
+  src="/analytics.js"
+  data-measurement-id={site.analyticsMeasurementId}
+></script>
