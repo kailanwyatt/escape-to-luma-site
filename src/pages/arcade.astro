@@ -1,6 +1,13 @@
 ---
+import { readFileSync } from "node:fs";
 import Base from "../layouts/Base.astro";
 import { site } from "../config";
+
+const gameHtml = readFileSync(new URL("../../public/arcade/game/index.html", import.meta.url), "utf8");
+const gameScript = gameHtml.match(/src="(\/arcade\/game\/_expo\/static\/js\/web\/[^"]+\.js)"/)?.[1];
+if (!gameScript) {
+  throw new Error("Arcade game bundle was not found in public/arcade/game/index.html");
+}
 
 const description =
   "Play Endless Voyage, the free browser Arcade mode for Spark: Escape to Luma. Read the moving opening, aim ahead, and launch to build a high score.";
@@ -59,14 +66,9 @@ const gameSchema = {
       </div>
     </div>
     <div class="arcade-cabinet">
-      <iframe
-        title="Spark Arcade: Endless Voyage"
-        src="/arcade/game/index.html"
-        allow="autoplay; fullscreen"
-        loading="eager"
-        data-arcade-frame
-      ></iframe>
+      <div id="root" data-arcade-root></div>
     </div>
+    <script is:inline defer src={gameScript} data-arcade-script></script>
   </section>
 
   <section class="arcade-rules" aria-labelledby="rules-title">
@@ -203,21 +205,23 @@ const gameSchema = {
     margin: 0 auto;
     overflow: hidden;
     overscroll-behavior: contain;
-    touch-action: none;
     border: 1px solid rgba(0, 204, 255, 0.62);
     border-radius: 1rem;
     background: #050b15;
     box-shadow: 0 0 0 1px rgba(255, 210, 74, 0.14), 0 1.2rem 3.8rem rgba(0, 204, 255, 0.16);
+    contain: layout paint;
   }
 
-  .arcade-cabinet iframe {
-    display: block;
+  .arcade-cabinet #root {
+    display: flex;
     width: 100%;
     height: 100%;
-    border: 0;
-    background: #050b15;
-    overscroll-behavior: contain;
-    touch-action: none;
+    min-height: 0;
+  }
+
+  :global(.top) {
+    backdrop-filter: none;
+    background: rgba(5, 11, 21, 0.96);
   }
 
   .arcade-game[data-view="wide"] .arcade-game-heading {
@@ -299,27 +303,29 @@ const gameSchema = {
   const game = document.querySelector<HTMLElement>("[data-arcade-game]");
   const toggle = document.querySelector<HTMLButtonElement>("[data-arcade-view-toggle]");
   const label = document.querySelector<HTMLElement>("[data-arcade-view-label]");
-  const frame = document.querySelector<HTMLIFrameElement>("[data-arcade-frame]");
+  const root = document.querySelector<HTMLElement>("[data-arcade-root]");
+  const gameScriptEl = document.querySelector<HTMLScriptElement>("[data-arcade-script]");
   const directLaunch = document.querySelector<HTMLAnchorElement>("[data-arcade-direct-launch]");
   type AnalyticsWindow = Window & {
     trackSparkEvent?: (eventName: string, parameters?: Record<string, string | number | boolean>) => void;
   };
   const analyticsWindow = window as AnalyticsWindow;
-  let iframeLoaded = false;
-  let iframeLoadTracked = false;
+  let gameReady = Boolean(root && root.childElementCount > 0);
+  let gameLoadTracked = false;
 
-  function trackIframeLoad(): void {
-    if (!iframeLoaded || iframeLoadTracked) return;
-    iframeLoadTracked = true;
-    analyticsWindow.trackSparkEvent?.("arcade_game_loaded");
+  function trackGameLoad(): void {
+    if (!gameReady || gameLoadTracked || !analyticsWindow.trackSparkEvent) return;
+    gameLoadTracked = true;
+    analyticsWindow.trackSparkEvent("arcade_game_loaded");
   }
 
-  frame?.addEventListener("load", () => {
-    iframeLoaded = true;
-    trackIframeLoad();
+  gameScriptEl?.addEventListener("load", () => {
+    gameReady = true;
+    trackGameLoad();
   });
 
-  document.addEventListener("spark-analytics-ready", trackIframeLoad);
+  document.addEventListener("spark-analytics-ready", trackGameLoad);
+  trackGameLoad();
 
   window.addEventListener("message", (event) => {
     if (event.origin !== window.location.origin || !event.data || event.data.source !== "spark-arcade") return;
