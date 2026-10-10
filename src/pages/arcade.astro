@@ -1,12 +1,12 @@
 ---
-import { readFileSync } from "node:fs";
 import Base from "../layouts/Base.astro";
 import { site } from "../config";
 
-const gameHtml = readFileSync(new URL("../../public/arcade/game/index.html", import.meta.url), "utf8");
-const gameScript = gameHtml.match(/src="(\/arcade\/game\/_expo\/static\/js\/web\/[^"]+\.js)"/)?.[1];
+const bundles = import.meta.glob("../../public/arcade/game/_expo/static/js/web/index-*.js");
+const bundleFile = Object.keys(bundles)[0]?.split("/").pop();
+const gameScript = bundleFile ? `/arcade/game/_expo/static/js/web/${bundleFile}` : undefined;
 if (!gameScript) {
-  throw new Error("Arcade game bundle was not found in public/arcade/game/index.html");
+  throw new Error("Arcade game bundle was not found in public/arcade/game/_expo/static/js/web");
 }
 
 const description =
