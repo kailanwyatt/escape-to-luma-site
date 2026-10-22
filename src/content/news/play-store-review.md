@@ -1,11 +1,11 @@
 ---
 title: "Spark is in review on Google Play"
-description: "The Android build has been submitted. Google Play is reviewing it. There is nothing to download there yet."
+description: "The Android build was submitted for review on October 3. Spark is now live on Google Play."
 date: 2026-10-03
 ---
 
-The Android build of Spark: Escape to Luma has been submitted to Google Play. Google is reviewing it.
+Update, October 22: Spark is live on Google Play. [Download it here.](https://play.google.com/store/apps/details?id=com.escapetoluma.spark)
 
-There is nothing to download on Play yet. When the listing is approved, this site will link it.
+The Android build of Spark: Escape to Luma was submitted to Google Play on October 3, and Google was reviewing it. There was nothing to download while that review was open.
 
-If you have an iPhone or iPad, the game is already available. [Spark is live on the App Store.](/news/app-store)
+If you have an iPhone or iPad, the game is on the App Store. [Spark is live on the App Store.](/news/app-store/)

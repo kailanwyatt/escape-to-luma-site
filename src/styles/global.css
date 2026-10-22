@@ -186,6 +186,12 @@ a:focus-visible {
   font-size: 0.88rem;
 }
 
+.store-links {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
 .mark {
   width: 2.5rem;
   height: 2.5rem;
@@ -659,6 +665,16 @@ a:focus-visible {
 }
 
 @media (max-width: 720px) {
+  .store-links {
+    gap: 0.3rem;
+  }
+
+  .store-links .btn-small {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.68rem;
+    white-space: nowrap;
+  }
+
   .menu-button {
     display: inline-flex;
   }

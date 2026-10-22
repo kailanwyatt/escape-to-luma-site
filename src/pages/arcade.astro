@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { site } from "../config";
+import { pageUrl, site } from "../config";
 
 const bundles = import.meta.glob("../../public/arcade/game/_expo/static/js/web/index-*.js");
 const bundleFile = Object.keys(bundles)[0]?.split("/").pop();
@@ -17,7 +17,7 @@ const gameSchema = {
   "@type": "VideoGame",
   name: "Spark Arcade: Endless Voyage",
   description,
-  url: `${site.url}/arcade`,
+  url: pageUrl("/arcade"),
   image: `${site.url}/og-arcade.jpg`,
   genre: ["Arcade", "Precision"],
   playMode: "SinglePlayer",

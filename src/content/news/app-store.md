@@ -12,4 +12,4 @@ Drag to aim, time the opening, and release to launch. Twenty chapters and 150 le
 
 There is no account. Progress stays on the device.
 
-Google Play is not part of this release.
+The Android version is on Google Play. [Get it on Google Play.](https://play.google.com/store/apps/details?id=com.escapetoluma.spark)

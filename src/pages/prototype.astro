@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import AnalyticsConsent from "../components/AnalyticsConsent.astro";
+import { pageUrl } from "../config";
 
 const description = "The first Spark prototype: throw a ball through a rotating fan blade.";
 ---
@@ -13,13 +14,14 @@ const description = "The first Spark prototype: throw a ball through a rotating 
     <title>Prototype · Spark: Escape to Luma</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#050B15" />
+    <link rel="canonical" href={pageUrl("/prototype")} />
     <link rel="icon" href="/favicon.png" type="image/png" />
   </head>
   <body class="proto">
     <a class="skip" href="#build">Skip to the prototype</a>
     <header class="proto-bar">
       <p>The first prototype. One blade, then two, then three.</p>
-      <a href="/origin">Back to how it started</a>
+      <a href="/origin/">Back to how it started</a>
     </header>
     <iframe id="build" title="The first Spark prototype" src="/game2/"></iframe>
     <AnalyticsConsent />

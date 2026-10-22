@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
-import { site } from "../config";
+import { pageUrl } from "../config";
 
 const staticRoutes = [
   "/",
@@ -29,7 +29,7 @@ function escapeXml(value: string): string {
 }
 
 function sitemapEntry(path: string, lastModified?: Date): string {
-  const url = new URL(path, site.url).toString();
+  const url = pageUrl(path);
   const lastmod = lastModified
     ? `\n    <lastmod>${lastModified.toISOString().slice(0, 10)}</lastmod>`
     : "";

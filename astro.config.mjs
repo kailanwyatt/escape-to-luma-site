@@ -5,6 +5,7 @@ import { defineConfig } from 'astro/config';
 // Output directory: dist
 export default defineConfig({
   output: 'static',
+  trailingSlash: 'always',
   build: {
     format: 'directory',
   },

@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { site } from "../config";
+import { pagePath, pageUrl, site } from "../config";
 import AnalyticsConsent from "../components/AnalyticsConsent.astro";
 
 interface Props {
@@ -19,8 +19,8 @@ const {
   home = false,
 } = Astro.props;
 const pageTitle = title ? `${title} · ${site.name}` : site.name;
-const path = Astro.url.pathname.replace(/\/$/, "") || "/";
-const canonicalUrl = new URL(path, site.url).toString();
+const path = pagePath(Astro.url.pathname);
+const canonicalUrl = pageUrl(path);
 const socialImageUrl = new URL(image, site.url).toString();
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -31,21 +31,21 @@ const websiteSchema = {
 };
 
 const links = [
-  { href: "/privacy", label: "Privacy" },
-  { href: "/advertising", label: "Advertising" },
-  { href: "/terms", label: "Terms" },
-  { href: "/support", label: "Support" },
-  { href: "/data", label: "Your Data" },
+  { href: "/privacy/", label: "Privacy" },
+  { href: "/advertising/", label: "Advertising" },
+  { href: "/terms/", label: "Terms" },
+  { href: "/support/", label: "Support" },
+  { href: "/data/", label: "Your Data" },
 ];
 
 const sections = [
-  { href: "/arcade", label: "Arcade" },
+  { href: "/arcade/", label: "Arcade" },
   { href: "/#features", label: "Features" },
   { href: "/#worlds", label: "Worlds" },
   { href: "/#gameplay", label: "Gameplay" },
-  { href: "/story", label: "Story" },
-  { href: "/origin", label: "Origin" },
-  { href: "/news", label: "News" },
+  { href: "/story/", label: "Story" },
+  { href: "/origin/", label: "Origin" },
+  { href: "/news/", label: "News" },
   { href: "/#faq", label: "FAQ" },
 ];
 ---
@@ -95,7 +95,10 @@ const sections = [
           </a>
         ))}
       </nav>
-      <a class="btn btn-small" href={site.appStoreUrl}>App Store</a>
+      <div class="store-links">
+        <a class="btn btn-small" href={site.appStoreUrl}>App Store</a>
+        <a class="btn btn-small" href={site.playStoreUrl}>Google Play</a>
+      </div>
     </header>
     <main id="content">
       <slot />
